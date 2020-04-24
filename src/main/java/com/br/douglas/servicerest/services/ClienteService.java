@@ -94,4 +94,6 @@ public class ClienteService {
 		enderecoRepository.saveAll(obj.getEnderecos());
 		return obj;
 	}
+	
+	
 }
