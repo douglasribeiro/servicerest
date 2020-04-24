@@ -5,12 +5,16 @@ import java.util.Date;
 import javax.persistence.Entity;
 
 import com.br.douglas.servicerest.domain.enus.EstadoPagamento;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class PagamentoComBoleto extends Pagamento{
 	private static final long serialVersionUID = 1L;
 
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm") 
 	private Date dataPagamento;
+	
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date dataVencimento;
 	
 	public PagamentoComBoleto() {}
