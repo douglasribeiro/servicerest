@@ -1,5 +1,6 @@
 package com.br.douglas.servicerest.resources;
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.br.douglas.servicerest.domain.Cliente;
 import com.br.douglas.servicerest.dto.ClienteDTO;
+import com.br.douglas.servicerest.dto.ClienteNewDto;
 import com.br.douglas.servicerest.services.ClienteService;
 
 @RestController
@@ -37,6 +40,15 @@ public class ClienteResource {
 		List<Cliente> list = service.findAll();
 		List<ClienteDTO> listDTO = list.stream().map(obj -> new ClienteDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDTO);
+	}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDto objDTO){
+		Cliente obj = service.fromDto(objDTO);
+		obj = service.insert(obj);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+				.path("/{id}").buildAndExpand(obj.getId()).toUri();
+		return ResponseEntity.created(uri).build();
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
@@ -63,4 +75,6 @@ public class ClienteResource {
 		Page<ClienteDTO> listDTO = list.map(obj -> new ClienteDTO(obj)); 
 		return ResponseEntity.ok().body(listDTO);
 	}
+	
+	
 }
