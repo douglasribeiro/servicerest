@@ -1,6 +1,5 @@
 package com.br.douglas.servicerest.services;
 
-import java.nio.channels.UnsupportedAddressTypeException;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,7 +10,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
-import com.br.douglas.servicerest.domain.Cliente;
 import com.br.douglas.servicerest.domain.Cliente;
 import com.br.douglas.servicerest.dto.ClienteDTO;
 import com.br.douglas.servicerest.repositories.ClienteRepository;
