@@ -3,7 +3,7 @@ package com.br.douglas.servicerest.domain.enus;
 public enum EstadoPagamento {
 	
 	PENDENTE(1, "Pendente"),
-	QIUTADO(2, "Quitado"),
+	QUITADO(2, "Quitado"),
 	CANCELADO(3, "Cancelado");
 	
 	private int cod;
