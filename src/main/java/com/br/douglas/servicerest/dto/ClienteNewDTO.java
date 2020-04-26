@@ -10,7 +10,7 @@ import org.hibernate.validator.constraints.Length;
 import com.br.douglas.servicerest.services.validation.ClienteInsert;
 
 @ClienteInsert
-public class ClienteNewDto implements Serializable{
+public class ClienteNewDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@NotEmpty(message = "Preenchimento obrigatorio.")
@@ -22,7 +22,7 @@ public class ClienteNewDto implements Serializable{
 	private String email;
 	
 	@NotEmpty(message = "Preenchimento obrigatorio.")
-	private String cfpOuCnpj;
+	private String cpfOuCnpj;
 	private Integer tipo;
 
 	@NotEmpty(message = "Preenchimento obrigatorio.")
@@ -41,7 +41,7 @@ public class ClienteNewDto implements Serializable{
 	
 	private Integer ciadeId;
 	
-	public ClienteNewDto() {}
+	public ClienteNewDTO() {}
 
 	public String getNome() {
 		return nome;
@@ -59,12 +59,12 @@ public class ClienteNewDto implements Serializable{
 		this.email = email;
 	}
 
-	public String getCfpOuCnpj() {
-		return cfpOuCnpj;
+	public String getCpfOuCnpj() {
+		return cpfOuCnpj;
 	}
 
-	public void setCfpOuCnpj(String cfpOuCnpj) {
-		this.cfpOuCnpj = cfpOuCnpj;
+	public void setCpfOuCnpj(String cpfOuCnpj) {
+		this.cpfOuCnpj = cpfOuCnpj;
 	}
 
 	public Integer getTipo() {

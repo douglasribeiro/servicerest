@@ -15,7 +15,7 @@ import com.br.douglas.servicerest.domain.Cliente;
 import com.br.douglas.servicerest.domain.Endereco;
 import com.br.douglas.servicerest.domain.enus.TipoCliente;
 import com.br.douglas.servicerest.dto.ClienteDTO;
-import com.br.douglas.servicerest.dto.ClienteNewDto;
+import com.br.douglas.servicerest.dto.ClienteNewDTO;
 import com.br.douglas.servicerest.repositories.CidadeRepository;
 import com.br.douglas.servicerest.repositories.ClienteRepository;
 import com.br.douglas.servicerest.repositories.EnderecoRepository;
@@ -68,8 +68,8 @@ public class ClienteService {
 		return new Cliente(objDTO.getId(), objDTO.getNome(), objDTO.getEmail(), null ,null);
 	}
 	
-	public Cliente fromDto(ClienteNewDto objDTO) {
-		Cliente cli = new Cliente(null, objDTO.getNome(), objDTO.getEmail(), objDTO.getCfpOuCnpj() , TipoCliente.toEnum(objDTO.getTipo()));
+	public Cliente fromDto(ClienteNewDTO objDTO) {
+		Cliente cli = new Cliente(null, objDTO.getNome(), objDTO.getEmail(), objDTO.getCpfOuCnpj() , TipoCliente.toEnum(objDTO.getTipo()));
 		Cidade cid = cidadeRepository.findCodigo(objDTO.getCiadeId());
 		Endereco endereco = new Endereco(null, objDTO.getLogradouro(), objDTO.getNumero(), objDTO.getComplemento(), objDTO.getBairro(), objDTO.getCep(), cli, cid);
 		cli.getEnderecos().add(endereco);

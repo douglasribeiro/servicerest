@@ -6,33 +6,47 @@ import java.util.List;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.br.douglas.servicerest.domain.Cliente;
 import com.br.douglas.servicerest.domain.enus.TipoCliente;
-import com.br.douglas.servicerest.dto.ClienteNewDto;
+import com.br.douglas.servicerest.dto.ClienteNewDTO;
+import com.br.douglas.servicerest.repositories.ClienteRepository;
 import com.br.douglas.servicerest.resources.exception.FieldMessage;
 import com.br.douglas.servicerest.services.validation.utils.BR;
 
-public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert, ClienteNewDto> {
+public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert, ClienteNewDTO> {
+	
+	@Autowired
+	ClienteRepository repo;
+
 	@Override
 	public void initialize(ClienteInsert ann) {
 	}
 
 	@Override
-	public boolean isValid(ClienteNewDto objDto, ConstraintValidatorContext context) {
+	public boolean isValid(ClienteNewDTO objDto, ConstraintValidatorContext context) {
 		
 		List<FieldMessage> list = new ArrayList<>();
-
-		if(objDto.getTipo().equals(TipoCliente.PESSOAFISICA.getCod()) && !BR.isValidCPF(objDto.getCfpOuCnpj())) {
-			list.add(new FieldMessage("cpfOuCnpj","CPF invalido."));
+		
+		if (objDto.getTipo().equals(TipoCliente.PESSOAFISICA.getCod()) && !BR.isValidCPF(objDto.getCpfOuCnpj())) {
+			list.add(new FieldMessage("cpfOuCnpj", "CPF inválido"));
 		}
-		if(objDto.getTipo().equals(TipoCliente.PESSOAJURIDICA.getCod()) && !BR.isValidCNPJ(objDto.getCfpOuCnpj())) {
-			list.add(new FieldMessage("cpfOuCnpj","CNPJ invalido."));
+
+		if (objDto.getTipo().equals(TipoCliente.PESSOAJURIDICA.getCod()) && !BR.isValidCNPJ(objDto.getCpfOuCnpj())) {
+			list.add(new FieldMessage("cpfOuCnpj", "CNPJ inválido"));
+		}
+		
+		Cliente aux = repo.findByEmail(objDto.getEmail());
+		if(aux != null) {
+			list.add(new FieldMessage("email", "Email ja cadastrado"));
 		}
 
 		for (FieldMessage e : list) {
 			context.disableDefaultConstraintViolation();
 			context.buildConstraintViolationWithTemplate(e.getMessage()).addPropertyNode(e.getFieldName())
 					.addConstraintViolation();
-		} 
+		}
 		return list.isEmpty();
 	}
 }
