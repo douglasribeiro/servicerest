@@ -41,6 +41,9 @@ public class ClienteNewDTO implements Serializable{
 	
 	private Integer ciadeId;
 	
+	@NotEmpty(message = "Preenchimento obrigatorio.")
+	private String senha;
+	
 	public ClienteNewDTO() {}
 
 	public String getNome() {
@@ -145,6 +148,14 @@ public class ClienteNewDTO implements Serializable{
 
 	public void setCiadeId(Integer ciadeId) {
 		this.ciadeId = ciadeId;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 	
 	
