@@ -68,7 +68,7 @@ public class ClienteService {
 					"Objeto não encontrado! Id: " + user.getId() + ", Tipo: " + Cliente.class.getName());
 		}
 		return obj;
-	}
+	}	
 	
 	public Cliente update(Cliente obj) {
 		Cliente newObj = find(obj.getId());
